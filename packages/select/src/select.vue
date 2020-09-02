@@ -195,7 +195,7 @@
       },
 
       iconClass() {
-        return this.remote && this.filterable ? 'arrow-up is-reverse' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up');
+        return this.remote && this.filterable ? 'arrow-up' : (this.visible ? 'arrow-up is-reverse' : 'arrow-up');
       },
 
       debounce() {

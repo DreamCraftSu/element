@@ -45,7 +45,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:DreamCraftSu/element.git"
+    "url": "git+ssh://git@github.com/DreamCraftSu/element.git"
   },
   "homepage": "http://element.eleme.io",
   "keywords": [
@@ -144,5 +144,11 @@
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.11",
     "webpack-node-externals": "^1.7.2"
-  }
+  },
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "test"
+  },
+  "author": "ariesel"
 }

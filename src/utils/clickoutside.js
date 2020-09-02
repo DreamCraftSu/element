@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { on } from 'exarcheia-element/src/utils/dom';
+import { on } from './dom';
 
 const nodeList = [];
 const ctx = '@@clickoutsideContext';

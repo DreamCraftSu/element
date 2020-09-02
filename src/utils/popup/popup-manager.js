@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { addClass, removeClass } from 'exarcheia-element/src/utils/dom';
+import { addClass, removeClass } from '../dom';
 
 let hasModal = false;
 let hasInitZIndex = false;

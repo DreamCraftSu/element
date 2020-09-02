@@ -1,4 +1,4 @@
-import { kebabCase } from 'exarcheia-element/src/utils/util';
+import { kebabCase } from '../utils/util';
 /**
  * Show migrating guide in browser console.
  *

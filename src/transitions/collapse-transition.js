@@ -1,4 +1,4 @@
-import { addClass, removeClass } from 'exarcheia-element/src/utils/dom';
+import { addClass, removeClass } from '../utils/dom';
 
 class Transition {
   beforeEnter(el) {

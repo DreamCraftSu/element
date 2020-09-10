@@ -52,7 +52,7 @@
     },
     computed: {
       active() {
-        return this.index === this.rootMenu.activeIndex;
+        return this.index === this.rootMenu.activeIndex || this.$route.name === this.route.name;
       },
       hoverBackground() {
         return this.rootMenu.hoverBackground;

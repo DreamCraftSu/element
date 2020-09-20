@@ -5,8 +5,7 @@
     @after-leave="afterLeave">
     <div
       v-show="visible"
-      class="el-dialog__wrapper"
-      :class="{ 'el-dialog__wrapper--flex': isFlex }"
+      :class="['dialog__wrapper', { 'el-dialog__wrapper--flex': isFlex }]"
       @mousedown.self="handleWrapperClick">
       <div
         role="dialog"

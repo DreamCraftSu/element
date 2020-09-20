@@ -6,6 +6,7 @@
     <div
       v-show="visible"
       class="el-dialog__wrapper"
+      :class="{ 'el-dialog__wrapper--flex': isFlex }"
       @mousedown.self="handleWrapperClick">
       <div
         role="dialog"
@@ -48,6 +49,11 @@
     mixins: [Popup, emitter, Migrating],
 
     props: {
+      isFlex: {
+        type: Boolean,
+        default: false,
+      },
+
       title: {
         type: String,
         default: ''

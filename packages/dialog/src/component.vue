@@ -5,6 +5,7 @@
     @after-leave="afterLeave">
     <div
       v-show="visible"
+      ref="el-dialog-wrapper"
       :class="['el-dialog__wrapper', { 'el-dialog__wrapper--flex': isFlex }]"
       @mousedown.self="handleWrapperClick">
       <div
@@ -167,10 +168,12 @@
           }
         };
       },
-      handleWrapperClick() {
-        if (!this.closeOnClickModal) return;
-        this.handleClose();
-      },
+      handleWrapperClick(e) {
+       const isClickScroll = e.clientX >= this.$refs['el-dialog-wrapper'].scrollWidth
+
+       if (!this.closeOnClickModal || isClickScroll) return;
+       this.handleClose();
+     },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
           this.beforeClose(this.hide);

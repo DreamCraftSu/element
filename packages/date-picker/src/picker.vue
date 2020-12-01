@@ -19,18 +19,18 @@
     @mouseleave.native="showClose = false"
     :validateEvent="false"
     ref="reference">
-    <template #prefix>
-      <slot name="prefix" @click="handleFocus">
-        <i class="el-input__icon" :class="triggerClass" v-if="isPrefixIcon" />
-      </slot>
-    </template>
-    <template #suffix>
-       <slot name="suffix" @click="handleClickIcon">
-          <i class="el-input__icon"
-             :class="[showClose ? '' + clearIcon : '']"
-             v-if="haveTrigger && isSuffixIcon" />
-      </slot>
-    </template>
+    <span slot="prefix" class="el-input__prefix-container" v-if="isPrefixIcon">
+       <slot name="prefix" @click="handleFocus">
+         <i class="el-input__icon" :class="triggerClass" />
+       </slot>
+     </span>
+     <span slot="suffix" class="el-input__suffix-container" v-if="isSuffixIcon">
+        <slot name="suffix" @click="handleClickIcon">
+           <i class="el-input__icon"
+              :class="[showClose ? '' + clearIcon : '']"
+              v-if="haveTrigger" />
+       </slot>
+     </span>
   </el-input>
   <div
     class="el-date-editor el-range-editor el-input__inner"

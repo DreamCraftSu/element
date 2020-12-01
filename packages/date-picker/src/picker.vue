@@ -19,17 +19,18 @@
     @mouseleave.native="showClose = false"
     :validateEvent="false"
     ref="reference">
-    <i slot="prefix"
-      class="el-input__icon"
-      :class="triggerClass"
-      @click="handleFocus">
-    </i>
-    <i slot="suffix"
-      class="el-input__icon"
-      @click="handleClickIcon"
-      :class="[showClose ? '' + clearIcon : '']"
-      v-if="haveTrigger">
-    </i>
+    <template #prefix>
+      <slot name="prefix" @click="handleFocus">
+        <i class="el-input__icon" :class="triggerClass" v-if="isPrefixIcon" />
+      </slot>
+    </template>
+    <template #suffix>
+       <slot name="suffix" @click="handleClickIcon">
+          <i class="el-input__icon"
+             :class="[showClose ? '' + clearIcon : '']"
+             v-if="haveTrigger && isSuffixIcon" />
+      </slot>
+    </template>
   </el-input>
   <div
     class="el-date-editor el-range-editor el-input__inner"
@@ -351,6 +352,14 @@ export default {
     startPlaceholder: String,
     endPlaceholder: String,
     prefixIcon: String,
+    isPrefixIcon: {
+      type: Boolean,
+      default: true,
+    },
+    isSuffixIcon: {
+      type: Boolean,
+      default: true,
+    },
     clearIcon: {
       type: String,
       default: 'el-icon-circle-close'

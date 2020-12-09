@@ -37,6 +37,9 @@
         v-model="firstValue"
         :tooltip-class="tooltipClass"
         ref="button1">
+        <span slot="content">
+          <slot></slot>
+        </span>
       </slider-button>
       <slider-button
         :vertical="vertical"
@@ -44,6 +47,9 @@
         :tooltip-class="tooltipClass"
         ref="button2"
         v-if="range">
+        <span slot="content">
+          <slot></slot>
+        </span>
       </slider-button>
       <div
         class="el-slider__stop"

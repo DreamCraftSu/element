@@ -3,7 +3,8 @@
     class="el-dropdown-menu__item"
     :class="{
       'is-disabled': disabled,
-      'el-dropdown-menu__item--divided': divided
+      'el-dropdown-menu__item--divided': divided,
+      'el-deopdown-menu__item--active': isActive
     }"
     @click="handleClick"
     :aria-disabled="disabled"
@@ -25,7 +26,8 @@
       command: {},
       disabled: Boolean,
       divided: Boolean,
-      icon: String
+      icon: String,
+      isActive: Boolean,
     },
 
     methods: {

@@ -4,7 +4,7 @@
     :class="{
       'is-disabled': disabled,
       'el-dropdown-menu__item--divided': divided,
-      'el-deopdown-menu__item--active': isActive
+      'el-dropdown-menu__item--active': isActive
     }"
     @click="handleClick"
     :aria-disabled="disabled"

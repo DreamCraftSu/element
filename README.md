@@ -10,11 +10,11 @@
     <img src="https://coveralls.io/repos/github/DreamCraftSu/element/badge.svg?branch=master">
   </a>
   <br>
-  <a href="http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS">
-    <img src="http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS">
+  <a href="http://img.badgesize.io/https://unpkg.com/exarcheia-element/lib/index.js?compression=gzip&label=gzip%20size:%20JS">
+    <img src="http://img.badgesize.io/https://unpkg.com/exarcheia-element/lib/index.js?compression=gzip&label=gzip%20size:%20JS">
   </a>
-  <a href="http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS">
-    <img src="http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS">
+  <a href="http://img.badgesize.io/https://unpkg.com/exarcheia-element/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS">
+    <img src="http://img.badgesize.io/https://unpkg.com/exarcheia-element/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS">
   </a>
   <a href="LICENSE">
     <img alt="GitHub license" src="https://img.shields.io/github/license/DreamCraftSu/element">
@@ -72,13 +72,13 @@
 
 ## Install
 ```shell
-npm install element-ui -S
+npm install exarcheia-element -S
 ```
 
 ## Quick Start
 ``` javascript
 import Vue from 'vue'
-import Element from 'element-ui'
+import Element from 'exarcheia-element'
 
 Vue.use(Element)
 
@@ -87,7 +87,7 @@ import {
   Select,
   Button
   // ...
-} from 'element-ui'
+} from 'exarcheia-element'
 
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)

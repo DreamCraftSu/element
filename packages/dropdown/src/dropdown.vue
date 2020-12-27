@@ -1,10 +1,10 @@
 <script>
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import ElButton from 'element-ui/packages/button';
-  import ElButtonGroup from 'element-ui/packages/button-group';
-  import { generateId } from 'element-ui/src/utils/util';
+  import Clickoutside from 'exarcheia-element/src/utils/clickoutside';
+  import Emitter from 'exarcheia-element/src/mixins/emitter';
+  import Migrating from 'exarcheia-element/src/mixins/migrating';
+  import ElButton from 'exarcheia-element/packages/button';
+  import ElButtonGroup from 'exarcheia-element/packages/button-group';
+  import { generateId } from 'exarcheia-element/src/utils/util';
 
   export default {
     name: 'ElDropdown',

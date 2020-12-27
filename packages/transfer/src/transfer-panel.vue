@@ -52,10 +52,10 @@
 </template>
 
 <script>
-  import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import ElInput from 'element-ui/packages/input';
-  import Locale from 'element-ui/src/mixins/locale';
+  import ElCheckboxGroup from 'exarcheia-element/packages/checkbox-group';
+  import ElCheckbox from 'exarcheia-element/packages/checkbox';
+  import ElInput from 'exarcheia-element/packages/input';
+  import Locale from 'exarcheia-element/src/mixins/locale';
 
   export default {
     mixins: [Locale],

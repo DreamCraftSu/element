@@ -3,7 +3,7 @@ import { kebabCase } from '../utils/util';
  * Show migrating guide in browser console.
  *
  * Usage:
- * import Migrating from 'element-ui/src/mixins/migrating';
+ * import Migrating from 'exarcheia-element/src/mixins/migrating';
  *
  * mixins: [Migrating]
  *

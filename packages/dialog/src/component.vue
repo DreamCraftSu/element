@@ -39,9 +39,9 @@
 </template>
 
 <script>
-  import Popup from 'element-ui/src/utils/popup';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import emitter from 'element-ui/src/mixins/emitter';
+  import Popup from 'exarcheia-element/src/utils/popup';
+  import Migrating from 'exarcheia-element/src/mixins/migrating';
+  import emitter from 'exarcheia-element/src/mixins/emitter';
 
   export default {
     name: 'ElDialog',

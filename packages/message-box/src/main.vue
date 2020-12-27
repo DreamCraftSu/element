@@ -79,13 +79,13 @@
 </template>
 
 <script type="text/babel">
-  import Popup from 'element-ui/src/utils/popup';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
-  import { addClass, removeClass } from 'element-ui/src/utils/dom';
-  import { t } from 'element-ui/src/locale';
-  import Dialog from 'element-ui/src/utils/aria-dialog';
+  import Popup from 'exarcheia-element/src/utils/popup';
+  import Locale from 'exarcheia-element/src/mixins/locale';
+  import ElInput from 'exarcheia-element/packages/input';
+  import ElButton from 'exarcheia-element/packages/button';
+  import { addClass, removeClass } from 'exarcheia-element/src/utils/dom';
+  import { t } from 'exarcheia-element/src/locale';
+  import Dialog from 'exarcheia-element/src/utils/aria-dialog';
 
   let messageBox;
   let typeMap = {

@@ -112,21 +112,21 @@
 </template>
 
 <script>
-import Popper from 'element-ui/src/utils/vue-popper';
-import Clickoutside from 'element-ui/src/utils/clickoutside';
-import Emitter from 'element-ui/src/mixins/emitter';
-import Locale from 'element-ui/src/mixins/locale';
-import Migrating from 'element-ui/src/mixins/migrating';
-import ElInput from 'element-ui/packages/input';
-import ElTag from 'element-ui/packages/tag';
-import ElScrollbar from 'element-ui/packages/scrollbar';
-import ElCascaderPanel from 'element-ui/packages/cascader-panel';
-import AriaUtils from 'element-ui/src/utils/aria-utils';
-import { t } from 'element-ui/src/locale';
-import { isEqual, isEmpty, kebabCase } from 'element-ui/src/utils/util';
-import { isUndefined, isFunction } from 'element-ui/src/utils/types';
-import { isDef } from 'element-ui/src/utils/shared';
-import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import Popper from 'exarcheia-element/src/utils/vue-popper';
+import Clickoutside from 'exarcheia-element/src/utils/clickoutside';
+import Emitter from 'exarcheia-element/src/mixins/emitter';
+import Locale from 'exarcheia-element/src/mixins/locale';
+import Migrating from 'exarcheia-element/src/mixins/migrating';
+import ElInput from 'exarcheia-element/packages/input';
+import ElTag from 'exarcheia-element/packages/tag';
+import ElScrollbar from 'exarcheia-element/packages/scrollbar';
+import ElCascaderPanel from 'exarcheia-element/packages/cascader-panel';
+import AriaUtils from 'exarcheia-element/src/utils/aria-utils';
+import { t } from 'exarcheia-element/src/locale';
+import { isEqual, isEmpty, kebabCase } from 'exarcheia-element/src/utils/util';
+import { isUndefined, isFunction } from 'exarcheia-element/src/utils/types';
+import { isDef } from 'exarcheia-element/src/utils/shared';
+import { addResizeListener, removeResizeListener } from 'exarcheia-element/src/utils/resize-event';
 import debounce from 'throttle-debounce/debounce';
 
 const { keys: KeyCode } = AriaUtils;

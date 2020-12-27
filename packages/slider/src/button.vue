@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import ElTooltip from 'element-ui/packages/tooltip';
+  import ElTooltip from 'exarcheia-element/packages/tooltip';
 
   export default {
     name: 'ElSliderButton',

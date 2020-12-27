@@ -48,12 +48,13 @@
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="selectDisabled"
         :autocomplete="autoComplete || autocomplete"
-        @focus="handleFocus"
-        @blur="softFocus = false"
+        @focus="softFocus = false"
+        @blur="handleBlur"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
         @keydown.up.prevent="navigateOptions('prev')"
+        @keydown.space="spaceSelectOption"
         @keydown.enter.prevent="selectOption"
         @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
@@ -266,6 +267,10 @@
             console.warn('[Element Warn][Select]\'auto-complete\' property will be deprecated in next major version. please use \'autocomplete\' instead.');
           return true;
         }
+      },
+      createTags: {
+        type: Boolean,
+        default: false
       },
       automaticDropdown: Boolean,
       size: String,
@@ -590,6 +595,7 @@
             this.$emit('blur', event);
           }
         }, 50);
+
         this.softFocus = false;
       },
 
@@ -750,6 +756,13 @@
           if (this.options[this.hoverIndex]) {
             this.handleOptionSelect(this.options[this.hoverIndex]);
           }
+        }
+      },
+
+      spaceSelectOption(e) {
+        if(this.createTags) {
+          e.preventDefault();
+          this.selectOption();
         }
       },
 

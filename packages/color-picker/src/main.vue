@@ -25,7 +25,8 @@
        @clear="clearValue"
        :color="color"
        :show-alpha="showAlpha"
-       :predefine="predefine">
+       :predefine="predefine"
+       :is-clear-button="isClearButton">
     </picker-dropdown>
   </div>
 </template>
@@ -48,7 +49,11 @@
       disabled: Boolean,
       size: String,
       popperClass: String,
-      predefine: Array
+      predefine: Array,
+      isClearButton: {
+        type: Boolean,
+        default: true
+      }
     },
 
     inject: {

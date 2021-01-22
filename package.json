@@ -1,6 +1,6 @@
 {
   "name": "exarcheia-element",
-  "version": "2.17.0",
+  "version": "2.17.22",
   "description": "A Component Library for Vue.js.",
   "main": "lib/exarcheia-element.common.js",
   "files": [

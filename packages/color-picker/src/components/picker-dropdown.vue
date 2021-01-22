@@ -9,7 +9,7 @@
       </div>
       <alpha-slider v-if="showAlpha" ref="alpha" :color="color"></alpha-slider>
       <predefine v-if="predefine" :color="color" :colors="predefine"></predefine>
-      <div class="el-color-dropdown__btns">
+      <div class="el-color-dropdown__btns" v-if="!isReactiveModel">
         <span class="el-color-dropdown__value">
           <el-input
             v-model="customInput"
@@ -69,7 +69,8 @@
       },
       showAlpha: Boolean,
       predefine: Array,
-      isClearButton: Boolean
+      isClearButton: Boolean,
+      isReactiveModel: Boolean
     },
 
     data() {

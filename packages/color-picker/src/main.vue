@@ -26,7 +26,9 @@
        :color="color"
        :show-alpha="showAlpha"
        :predefine="predefine"
-       :is-clear-button="isClearButton">
+       :is-clear-button="isClearButton"
+       :is-reactive-model="isReactiveModel"
+       >
     </picker-dropdown>
   </div>
 </template>
@@ -53,6 +55,11 @@
       isClearButton: {
         type: Boolean,
         default: true
+      },
+
+      isReactiveModel: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -115,6 +122,9 @@
         if (val !== currentValueColorRgb) {
           this.$emit('active-change', val);
         }
+        if(this.isReactiveModel) {
+          this.confirmValue()
+        }
       }
     },
 
@@ -128,7 +138,10 @@
         this.$emit('input', value);
         this.$emit('change', value);
         this.dispatch('ElFormItem', 'el.form.change', value);
-        this.showPicker = false;
+
+        if(!this.isReactiveModel) {
+            this.showPicker = false;
+        }
       },
       clearValue() {
         this.$emit('input', null);

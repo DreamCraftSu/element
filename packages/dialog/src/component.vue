@@ -51,7 +51,7 @@
     props: {
       isFlex: {
         type: Boolean,
-        default: false,
+        default: false
       },
 
       title: {
@@ -169,11 +169,12 @@
         };
       },
       handleWrapperClick(e) {
-       const isClickScroll = e.clientX >= this.$refs['el-dialog-wrapper'].scrollWidth
+        const isClickScroll = e.clientX >= this.$refs['el-dialog-wrapper'].scrollWidth;
 
-       if (!this.closeOnClickModal || isClickScroll) return;
-       this.handleClose();
-     },
+        if (!this.closeOnClickModal || isClickScroll) return;
+
+        this.handleClose();
+      },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
           this.beforeClose(this.hide);

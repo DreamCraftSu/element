@@ -354,11 +354,11 @@ export default {
     prefixIcon: String,
     isPrefixIcon: {
       type: Boolean,
-      default: true,
+      default: true
     },
     isSuffixIcon: {
       type: Boolean,
-      default: true,
+      default: true
     },
     clearIcon: {
       type: String,

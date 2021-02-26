@@ -27,7 +27,7 @@
       disabled: Boolean,
       divided: Boolean,
       icon: String,
-      isActive: Boolean,
+      isActive: Boolean
     },
 
     methods: {

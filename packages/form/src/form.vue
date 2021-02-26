@@ -1,8 +1,12 @@
 <template>
-  <form class="el-form" :class="[
-    labelPosition ? 'el-form--label-' + labelPosition : '',
-    { 'el-form--inline': inline }
-  ]">
+  <form
+    class="el-form"
+    :class="[
+      labelPosition ? 'el-form--label-' + labelPosition : '',
+      { 'el-form--inline': inline }
+    ]"
+    @submit="$emit('submit', $event)"
+  >
     <slot></slot>
   </form>
 </template>

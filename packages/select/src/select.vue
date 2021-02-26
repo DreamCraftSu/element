@@ -760,7 +760,7 @@
       },
 
       spaceSelectOption(e) {
-        if(this.createTags) {
+        if (this.createTags) {
           e.preventDefault();
           this.selectOption();
         }

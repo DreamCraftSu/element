@@ -122,8 +122,9 @@
         if (val !== currentValueColorRgb) {
           this.$emit('active-change', val);
         }
-        if(this.isReactiveModel) {
-          this.confirmValue()
+
+        if (this.isReactiveModel) {
+          this.confirmValue();
         }
       }
     },
@@ -139,8 +140,8 @@
         this.$emit('change', value);
         this.dispatch('ElFormItem', 'el.form.change', value);
 
-        if(!this.isReactiveModel) {
-            this.showPicker = false;
+        if (!this.isReactiveModel) {
+          this.showPicker = false;
         }
       },
       clearValue() {

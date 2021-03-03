@@ -35,25 +35,27 @@
       </div>
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
-        <img
-          v-for="(url, i) in urlList"
-          v-if="i === index"
-          ref="img"
-          class="el-image-viewer__img"
-          :key="url"
-          :src="currentImg"
-          :style="imgStyle"
-          @load="handleImgLoad"
-          @error="handleImgError"
-          @mousedown="handleMouseDown">
+        <picture v-for="(image, i) in mappedUrlList" v-if="i === index" :key="i">
+          <source v-if="isWebp" :srcset="currentImg.webp" type="image/webp" />
+          <img
+            ref="img"
+            class="el-image-viewer__img"
+            alt="preview"
+            :src="currentImg.original"
+            :style="imgStyle"
+            @load="handleImgLoad"
+            @error="handleImgError"
+            @mousedown="handleMouseDown"
+          />
+        </picture>
       </div>
     </div>
   </transition>
 </template>
 
 <script>
-import { on, off } from 'exarcheia-element/src/utils/dom';
-import { rafThrottle, isFirefox } from 'exarcheia-element/src/utils/util';
+import { on, off } from '../../../src/utils/dom';
+import { rafThrottle, isFirefox } from '../../../src/utils/util';
 
 const Mode = {
   CONTAIN: {
@@ -111,17 +113,26 @@ export default {
     };
   },
   computed: {
+    mappedUrlList() {
+      return this.urlList.map(item => typeof item === 'object' ? item : {
+        webp: false,
+        original: item
+      });
+    },
+    isWebp() {
+      return Boolean(this.currentImg.webp);
+    },
     isSingle() {
-      return this.urlList.length <= 1;
+      return this.mappedUrlList.length <= 1;
     },
     isFirst() {
       return this.index === 0;
     },
     isLast() {
-      return this.index === this.urlList.length - 1;
+      return this.index === this.mappedUrlList.length - 1;
     },
     currentImg() {
-      return this.urlList[this.index];
+      return this.mappedUrlList[this.index];
     },
     imgStyle() {
       const { scale, deg, offsetX, offsetY, enableTransition } = this.transform;
@@ -144,7 +155,7 @@ export default {
         this.onSwitch(val);
       }
     },
-    currentImg(val) {
+    currentImg() {
       this.$nextTick(_ => {
         const $img = this.$refs.img[0];
         if (!$img.complete) {
@@ -211,29 +222,52 @@ export default {
       this._keyDownHandler = null;
       this._mouseWheelHandler = null;
     },
-    handleImgLoad(e) {
+    handleImgLoad() {
       this.loading = false;
     },
     handleImgError(e) {
       this.loading = false;
-      e.target.alt = '加载失败';
+      e.target.alt = 'Not found';
+    },
+    getPageXFromEvent(e) {
+      return e.type === 'mousedown' ? e.pageX : e.changedTouches[0].pageX;
+    },
+    getPageYFromEvent(e) {
+      return e.type === 'mousedown' ? e.pageY : e.changedTouches[0].pageY;
     },
     handleMouseDown(e) {
       if (this.loading || e.button !== 0) return;
 
       const { offsetX, offsetY } = this.transform;
-      const startX = e.pageX;
-      const startY = e.pageY;
+      const startX = this.getPageXFromEvent(e);
+      const startY = this.getPageYFromEvent(e);
+
       this._dragHandler = rafThrottle(ev => {
-        this.transform.offsetX = offsetX + ev.pageX - startX;
-        this.transform.offsetY = offsetY + ev.pageY - startY;
+        this.transform.offsetX = offsetX + this.getPageXFromEvent(ev) - startX;
+        this.transform.offsetY = offsetY + this.getPageYFromEvent(ev) - startY;
       });
+
+      on(document, 'touchmove', this._dragHandler);
+      on(document, 'touchend', () => {
+        off(document, 'touchmove', this._dragHandler);
+      });
+
       on(document, 'mousemove', this._dragHandler);
-      on(document, 'mouseup', ev => {
+      on(document, 'mouseup', () => {
         off(document, 'mousemove', this._dragHandler);
       });
 
       e.preventDefault();
+    },
+    addTouchStartForImg() {
+      this.$nextTick(() => {
+        this.$refs.img.addEventListener('touchstart', this.handleMouseDown);
+      });
+    },
+    removeTouchStartForImg() {
+      this.$nextTick(() => {
+        this.$refs.img.removeEventListener('touchstart', this.handleMouseDown);
+      });
     },
     reset() {
       this.transform = {
@@ -256,13 +290,21 @@ export default {
     },
     prev() {
       if (this.isFirst && !this.infinite) return;
-      const len = this.urlList.length;
+      this.removeTouchStartForImg();
+
+      const len = this.mappedUrlList.length;
       this.index = (this.index - 1 + len) % len;
+
+      this.addTouchStartForImg();
     },
     next() {
       if (this.isLast && !this.infinite) return;
-      const len = this.urlList.length;
+      this.removeTouchStartForImg();
+
+      const len = this.mappedUrlList.length;
       this.index = (this.index + 1) % len;
+
+      this.addTouchStartForImg();
     },
     handleActions(action, options = {}) {
       if (this.loading) return;
@@ -297,6 +339,8 @@ export default {
     // add tabindex then wrapper can be focusable via Javascript
     // focus wrapper so arrow key can't cause inner scroll behavior underneath
     this.$refs['el-image-viewer__wrapper'].focus();
+
+    this.addTouchStartForImg();
   }
 };
 </script>

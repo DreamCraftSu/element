@@ -5,7 +5,8 @@
       labelPosition ? 'el-form--label-' + labelPosition : '',
       { 'el-form--inline': inline }
     ]"
-    @submit="$emit('submit', $event)"
+    @keyup.prevent.enter="submitKeyupEnterHandler"
+    @submit.prevent="submitHandler"
   >
     <slot></slot>
   </form>
@@ -91,6 +92,14 @@
       });
     },
     methods: {
+      submitKeyupEnterHandler(e) {
+        this.$emit('submit-enter', e);
+      },
+
+      submitHandler(e) {
+        this.$emit('submit', e);
+      },
+
       resetFields() {
         if (!this.model) {
           console.warn('[Element Warn][Form]model is required for resetFields to work.');

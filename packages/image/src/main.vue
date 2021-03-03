@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import ImageViewer from './image-viewer';
+  import ImageViewer from '../../image-viewer/src/main';
   import Locale from 'exarcheia-element/src/mixins/locale';
   import { on, off, getScrollContainer, isInContainer } from 'exarcheia-element/src/utils/dom';
   import { isString, isHtmlElement } from 'exarcheia-element/src/utils/types';

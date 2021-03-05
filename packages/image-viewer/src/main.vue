@@ -9,16 +9,16 @@
       <!-- ARROW -->
       <template v-if="!isSingle">
         <span
-          class="el-image-viewer__btn el-image-viewer__prev"
-          :class="{ 'is-disabled': !infinite && isFirst }"
-          @click="prev">
-          <i class="el-icon-arrow-left"/>
+            class="el-image-viewer__btn el-image-viewer__prev"
+            :class="{ 'is-disabled': !infinite && isFirst }"
+            @click="prev">
+          <i class="el-icon-arrow-left" />
         </span>
         <span
-          class="el-image-viewer__btn el-image-viewer__next"
-          :class="{ 'is-disabled': !infinite && isLast }"
-          @click="next">
-          <i class="el-icon-arrow-right"/>
+            class="el-image-viewer__btn el-image-viewer__next"
+            :class="{ 'is-disabled': !infinite && isLast }"
+            @click="next">
+          <i class="el-icon-arrow-right" />
         </span>
       </template>
       <!-- ACTIONS -->
@@ -35,17 +35,22 @@
       </div>
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
-        <picture v-for="(image, i) in mappedUrlList" v-if="i === index" :key="i">
+        <picture
+            v-for="(image, i) in mappedUrlList"
+            v-if="i === index" :key="i"
+            ref="picture"
+            :style="pictureStyle"
+            @mousedown="handleMouseDown"
+        >
           <source v-if="isWebp" :srcset="currentImg.webp" type="image/webp" />
           <img
-            ref="img"
-            class="el-image-viewer__img"
-            alt="preview"
-            :src="currentImg.original"
-            :style="imgStyle"
-            @load="handleImgLoad"
-            @error="handleImgError"
-            @mousedown="handleMouseDown"
+              class="el-image-viewer__img"
+              alt="preview"
+              ref="img"
+              :style="imgStyle"
+              :src="currentImg.original"
+              @load="handleImgLoad"
+              @error="handleImgError"
           />
         </picture>
       </div>
@@ -54,8 +59,8 @@
 </template>
 
 <script>
-import { on, off } from '../../../src/utils/dom';
-import { rafThrottle, isFirefox } from '../../../src/utils/util';
+import { off, on } from '../../../src/utils/dom';
+import { isFirefox, rafThrottle } from '../../../src/utils/util';
 
 const Mode = {
   CONTAIN: {
@@ -84,11 +89,13 @@ export default {
     },
     onSwitch: {
       type: Function,
-      default: () => {}
+      default: () => {
+      }
     },
     onClose: {
       type: Function,
-      default: () => {}
+      default: () => {
+      }
     },
     initialIndex: {
       type: Number,
@@ -134,7 +141,7 @@ export default {
     currentImg() {
       return this.mappedUrlList[this.index];
     },
-    imgStyle() {
+    pictureStyle() {
       const { scale, deg, offsetX, offsetY, enableTransition } = this.transform;
       const style = {
         transform: `scale(${scale}) rotate(${deg}deg)`,
@@ -142,10 +149,18 @@ export default {
         'margin-left': `${offsetX}px`,
         'margin-top': `${offsetY}px`
       };
+
       if (this.mode === Mode.CONTAIN) {
         style.maxWidth = style.maxHeight = '100%';
       }
+
       return style;
+    },
+    imgStyle() {
+      return this.mode === Mode.CONTAIN ? {
+        maxWidth: '100vw',
+        maxHeight: '100vh'
+      } : {};
     }
   },
   watch: {
@@ -166,6 +181,7 @@ export default {
   },
   methods: {
     hide() {
+      this.removeTouchStartForImg();
       this.deviceSupportUninstall();
       this.onClose();
     },
@@ -177,23 +193,23 @@ export default {
           case 27:
             this.hide();
             break;
-          // SPACE
+            // SPACE
           case 32:
             this.toggleMode();
             break;
-          // LEFT_ARROW
+            // LEFT_ARROW
           case 37:
             this.prev();
             break;
-          // UP_ARROW
+            // UP_ARROW
           case 38:
             this.handleActions('zoomIn');
             break;
-          // RIGHT_ARROW
+            // RIGHT_ARROW
           case 39:
             this.next();
             break;
-          // DOWN_ARROW
+            // DOWN_ARROW
           case 40:
             this.handleActions('zoomOut');
             break;
@@ -230,13 +246,13 @@ export default {
       e.target.alt = 'Not found';
     },
     getPageXFromEvent(e) {
-      return e.type === 'mousedown' ? e.pageX : e.changedTouches[0].pageX;
+      return ['mousedown', 'mousemove'].includes(e.type) ? e.pageX : e.changedTouches[0].pageX;
     },
     getPageYFromEvent(e) {
-      return e.type === 'mousedown' ? e.pageY : e.changedTouches[0].pageY;
+      return ['mousedown', 'mousemove'].includes(e.type) ? e.pageY : e.changedTouches[0].pageY;
     },
     handleMouseDown(e) {
-      if (this.loading || e.button !== 0) return;
+      if (this.loading || (e.button !== 0 && e.type === 'mousedown')) return;
 
       const { offsetX, offsetY } = this.transform;
       const startX = this.getPageXFromEvent(e);
@@ -261,12 +277,12 @@ export default {
     },
     addTouchStartForImg() {
       this.$nextTick(() => {
-        this.$refs.img.addEventListener('touchstart', this.handleMouseDown);
+        this.$refs.picture[0].addEventListener('touchstart', this.handleMouseDown);
       });
     },
     removeTouchStartForImg() {
       this.$nextTick(() => {
-        this.$refs.img.removeEventListener('touchstart', this.handleMouseDown);
+        this.$refs.picture[0].removeEventListener('touchstart', this.handleMouseDown);
       });
     },
     reset() {

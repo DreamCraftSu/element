@@ -74,6 +74,7 @@ import TimelineItem from '../packages/timeline-item/index.js';
 import Link from '../packages/link/index.js';
 import Divider from '../packages/divider/index.js';
 import Image from '../packages/image/index.js';
+import ImageViewer from '../packages/image-viewer/index.js';
 import Calendar from '../packages/calendar/index.js';
 import Backtop from '../packages/backtop/index.js';
 import InfiniteScroll from '../packages/infinite-scroll/index.js';
@@ -156,6 +157,7 @@ const components = [
   Link,
   Divider,
   Image,
+  ImageViewer,
   Calendar,
   Backtop,
   PageHeader,
@@ -198,7 +200,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.18.12',
+  version: '2.18.5',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -277,6 +279,7 @@ export default {
   Link,
   Divider,
   Image,
+  ImageViewer,
   Calendar,
   Backtop,
   InfiniteScroll,

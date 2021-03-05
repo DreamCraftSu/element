@@ -1,36 +1,36 @@
 <template>
   <transition name="viewer-fade">
     <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': zIndex }">
-      <div class="el-image-viewer__mask"></div>
+      <div class="el-image-viewer__mask"/>
       <!-- CLOSE -->
-      <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
-        <i class="el-icon-circle-close"></i>
-      </span>
+      <button class="el-image-viewer__btn el-image-viewer__close" @click="hide">
+        <i class="el-icon-circle-close"/>
+      </button>
       <!-- ARROW -->
       <template v-if="!isSingle">
-        <span
+        <button
             class="el-image-viewer__btn el-image-viewer__prev"
             :class="{ 'is-disabled': !infinite && isFirst }"
             @click="prev">
-          <i class="el-icon-arrow-left" />
-        </span>
-        <span
+          <i class="el-icon-arrow-left"/>
+        </button>
+        <button
             class="el-image-viewer__btn el-image-viewer__next"
             :class="{ 'is-disabled': !infinite && isLast }"
             @click="next">
-          <i class="el-icon-arrow-right" />
-        </span>
+          <i class="el-icon-arrow-right"/>
+        </button>
       </template>
       <!-- ACTIONS -->
       <div class="el-image-viewer__btn el-image-viewer__actions">
         <div class="el-image-viewer__actions__inner">
-          <i class="el-icon-zoom-out" @click="handleActions('zoomOut')"></i>
-          <i class="el-icon-zoom-in" @click="handleActions('zoomIn')"></i>
+          <button @click="handleActions('zoomOut')"><i class="el-icon-zoom-out"/></button>
+          <button @click="handleActions('zoomIn')"><i class="el-icon-zoom-in"/></button>
+          <i class="el-image-viewer__actions__divider"/>
+          <button @click="toggleMode"><i :class="mode.icon"/></button>
           <i class="el-image-viewer__actions__divider"></i>
-          <i :class="mode.icon" @click="toggleMode"></i>
-          <i class="el-image-viewer__actions__divider"></i>
-          <i class="el-icon-refresh-left" @click="handleActions('anticlocelise')"></i>
-          <i class="el-icon-refresh-right" @click="handleActions('clocelise')"></i>
+          <button @click="handleActions('anticlocelise')"><i class="el-icon-refresh-left"/></button>
+          <button @click="handleActions('clocelise')"><i class="el-icon-refresh-right"/></button>
         </div>
       </div>
       <!-- CANVAS -->
@@ -42,7 +42,7 @@
             :style="pictureStyle"
             @mousedown="handleMouseDown"
         >
-          <source v-if="isWebp" :srcset="currentImg.webp" type="image/webp" />
+          <source v-if="isWebp" :srcset="currentImg.webp" type="image/webp"/>
           <img
               class="el-image-viewer__img"
               alt="preview"
@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import { off, on } from '../../../src/utils/dom';
-import { isFirefox, rafThrottle } from '../../../src/utils/util';
+import {off, on} from '../../../src/utils/dom';
+import {isFirefox, rafThrottle} from '../../../src/utils/util';
 
 const Mode = {
   CONTAIN: {
@@ -142,7 +142,7 @@ export default {
       return this.mappedUrlList[this.index];
     },
     pictureStyle() {
-      const { scale, deg, offsetX, offsetY, enableTransition } = this.transform;
+      const {scale, deg, offsetX, offsetY, enableTransition} = this.transform;
       const style = {
         transform: `scale(${scale}) rotate(${deg}deg)`,
         transition: enableTransition ? 'transform .3s' : '',
@@ -254,7 +254,7 @@ export default {
     handleMouseDown(e) {
       if (this.loading || (e.button !== 0 && e.type === 'mousedown')) return;
 
-      const { offsetX, offsetY } = this.transform;
+      const {offsetX, offsetY} = this.transform;
       const startX = this.getPageXFromEvent(e);
       const startY = this.getPageYFromEvent(e);
 
@@ -324,13 +324,13 @@ export default {
     },
     handleActions(action, options = {}) {
       if (this.loading) return;
-      const { zoomRate, rotateDeg, enableTransition } = {
+      const {zoomRate, rotateDeg, enableTransition} = {
         zoomRate: 0.2,
         rotateDeg: 90,
         enableTransition: true,
         ...options
       };
-      const { transform } = this;
+      const {transform} = this;
       switch (action) {
         case 'zoomOut':
           if (transform.scale > 0.2) {

@@ -92,7 +92,11 @@
       },
 
       currentPosition() {
-        return `${ (this.value - this.min) / (this.max - this.min) * 100 }%`;
+        const firstValue = this.value - this.min;
+        const lastValue = this.max - this.min;
+        const resultValues = firstValue - lastValue;
+
+        return `${ (resultValues <= 0 ? 1 : (firstValue / lastValue)) * 100 }%`;
       },
 
       enableFormat() {

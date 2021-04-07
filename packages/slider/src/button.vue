@@ -96,7 +96,7 @@
         const lastValue = this.max - this.min;
         const resultValues = firstValue - lastValue;
 
-        return `${ (resultValues <= 0 ? 1 : (firstValue / lastValue)) * 100 }%`;
+        return `${ (resultValues === 0 ? 1 : (firstValue / lastValue)) * 100 }%`;
       },
 
       enableFormat() {

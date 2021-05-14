@@ -19,13 +19,13 @@
     @mouseleave.native="showClose = false"
     :validateEvent="false"
     ref="reference">
-    <span slot="prefix" class="el-input__prefix-container" v-if="isPrefixIcon">
-       <slot name="prefix" @click="handleFocus">
+    <span slot="prefix" class="el-input__prefix-container" v-if="isPrefixIcon" @click="handleFocus">
+       <slot name="prefix">
          <i class="el-input__icon" :class="triggerClass" />
        </slot>
      </span>
-     <span slot="suffix" class="el-input__suffix-container" v-if="isSuffixIcon">
-        <slot name="suffix" @click="handleClickIcon">
+     <span slot="suffix" class="el-input__suffix-container" v-if="isSuffixIcon" @click="handleClickIcon">
+        <slot name="suffix">
            <i class="el-input__icon"
               :class="[showClose ? '' + clearIcon : '']"
               v-if="haveTrigger" />
@@ -676,7 +676,7 @@ export default {
       }
     },
 
-    handleStartChange(event) {
+    handleStartChange() {
       const value = this.parseString(this.userInput && this.userInput[0]);
       if (value) {
         this.userInput = [this.formatToString(value), this.displayValue[1]];
@@ -689,7 +689,7 @@ export default {
       }
     },
 
-    handleEndChange(event) {
+    handleEndChange() {
       const value = this.parseString(this.userInput && this.userInput[1]);
       if (value) {
         this.userInput = [this.displayValue[0], this.formatToString(value)];

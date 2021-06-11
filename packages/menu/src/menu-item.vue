@@ -52,7 +52,7 @@
     },
     computed: {
       active() {
-        return this.index === this.rootMenu.activeIndex || this.$route.name === this.route.name;
+        return this.index === this.rootMenu.activeIndex || this.$route.name === (typeof this.route === 'object' ? this.route.name : '');
       },
       hoverBackground() {
         return this.rootMenu.hoverBackground;

@@ -344,6 +344,18 @@ export default {
   },
 
   props: {
+    isVisibleNowButton: {
+      type: Boolean,
+      default: true
+    },
+    saveButtonSize: {
+      type: String,
+      default: 'mini'
+    },
+    saveButtonType: {
+      type: String,
+      default: 'default'
+    },
     size: String,
     format: String,
     valueFormat: String,
@@ -831,6 +843,9 @@ export default {
 
     mountPicker() {
       this.picker = new Vue(this.panel).$mount();
+      this.picker.isVisibleNowButton = this.isVisibleNowButton;
+      this.picker.saveButtonSize = this.saveButtonSize;
+      this.picker.saveButtonType = this.saveButtonType;
       this.picker.defaultValue = this.defaultValue;
       this.picker.defaultTime = this.defaultTime;
       this.picker.popperClass = this.popperClass;

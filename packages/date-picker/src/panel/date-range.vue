@@ -168,6 +168,7 @@
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
         <el-button
+          v-if="isVisibleNowButton"
           size="mini"
           type="text"
           class="el-picker-panel__link-btn"
@@ -175,8 +176,8 @@
           {{ t('el.datepicker.clear') }}
         </el-button>
         <el-button
-          plain
-          size="mini"
+          :size="saveButtonSize"
+          :type="saveButtonType"
           class="el-picker-panel__link-btn"
           :disabled="btnDisabled"
           @click="handleConfirm(false)">
@@ -316,6 +317,9 @@
     data() {
       return {
         popperClass: '',
+        saveButtonSize: 'mini',
+        saveButtonType: 'default',
+        isVisibleNowButton: true,
         value: [],
         defaultValue: null,
         defaultTime: null,
